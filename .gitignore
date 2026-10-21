@@ -30,3 +30,4 @@ __pycache__/
 *.pyc
 *.log
 .for_reference/
+custom/

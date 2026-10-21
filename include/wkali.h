@@ -11,13 +11,13 @@
 
 /* Network Settings — arbitrary port, chosen to avoid colliding with other
  * homebrew HTTP servers (must match the deeplink in assets/param.json.template) */
-#define WKALI_PORT 18181
+#define WKALI_PORT 18182
 
 /* Title ID of the installed homescreen app ("WebKit Autoloader") */
-#define WKAL_TITLE_ID "WKAL00001"
+#define WKAL_TITLE_ID "LNXL00001"
 
 /* Process identity — used to kill stale installer instances on startup */
-#define WKALI_THREAD_NAME "wkali.elf"
+#define WKALI_THREAD_NAME "lnxli.elf"
 
 /* Routes */
 #define ROUTE_INDEX "/"

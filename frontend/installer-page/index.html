@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>WebKit Autoloader Installer v[[VERSION_PLACEHOLDER]] by PLK (built [[BUILD_TIME_PLACEHOLDER]])</title>
+  <title>Linux Loader Installer v[[VERSION_PLACEHOLDER]] by PLK (built [[BUILD_TIME_PLACEHOLDER]])</title>
   <style>
     * {
       margin: 0;
@@ -373,8 +373,8 @@
 
 <body>
   <main>
-    <img class="logo" src="/logo.svg" alt="WebKit Autoloader" />
-    <h1>WebKit Autoloader Installer</h1>
+    <img class="logo" src="/logo.svg" alt="Linux Loader" />
+    <h1>Linux Loader Installer</h1>
     <p id="status">Caching content...</p>
     <p id="detail">Please wait a moment. Do not close this page yet!</p>
 
@@ -401,7 +401,7 @@
 
   </main>
 
-  <footer id="footer">WebKit Autoloader Installer v[[VERSION_PLACEHOLDER]] by PLK (built [[BUILD_TIME_PLACEHOLDER]])<br />This project is free and open source: github.com/itsPLK/ps5-webkit-autoloader</footer>
+  <footer id="footer">Linux Loader Installer v[[VERSION_PLACEHOLDER]] by PLK (built [[BUILD_TIME_PLACEHOLDER]])<br />This project is free and open source: github.com/itsPLK/ps5-webkit-autoloader</footer>
 
   <div id="cacheCorruptOverlay" role="dialog" aria-modal="true" aria-labelledby="repairTitle" aria-describedby="repairMessage" hidden>
     <div class="card">
@@ -614,7 +614,7 @@
         status.textContent = 'Installed successfully';
         status.className = 'success';
         progress.className = 'success';
-        detail.textContent = 'Reboot, then open WebKit Autoloader from the homescreen. You can close this page.';
+        detail.textContent = 'Reboot, then open Linux Loader from the homescreen. You can close this page.';
       })
       .catch(function (error) { fail(error.message); });
   }

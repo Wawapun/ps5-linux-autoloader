@@ -1,11 +1,11 @@
 {
-    "titleId": "WKAL00001",
+    "titleId": "LNXL00001",
     "applicationCategoryType": 65536,
-    "deeplinkUri": "http://127.0.0.1:18181/app/index.html",
+    "deeplinkUri": "http://127.0.0.1:18182/app/index.html",
     "localizedParameters": {
         "defaultLanguage": "en-US",
         "en-US": {
-            "titleName": "WebKit Autoloader v[[VERSION_PLACEHOLDER]]"
+            "titleName": "Linux Loader"
         }
     }
 }

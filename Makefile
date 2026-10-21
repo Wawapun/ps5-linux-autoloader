@@ -49,6 +49,11 @@ INSTALLER_LOGO := frontend/installer-page/logo.svg
 HOST_PAYLOAD ?= $(ELF)
 PAYLOAD_TAG ?= $(shell git -C third_party/ps5-unified-autoloader describe --tags --always 2>/dev/null || echo v0.1.5-915a65e)
 AUTOLOAD_PAYLOAD_VIRTUAL ?= ps5-unified-autoloader-$(PAYLOAD_TAG).elf
+# Bake a custom ELF into the page instead of the unified autoloader. When the file
+# below exists it is embedded as the autoload payload; otherwise the downloaded
+# unified autoloader is used as before.
+CUSTOM_PAYLOAD ?= custom/Linuxloader.elf
+AUTOLOAD_ELF := $(if $(wildcard $(CUSTOM_PAYLOAD)),$(CUSTOM_PAYLOAD),build/deps/autoload.elf)
 HOST_PAYLOAD_VIRTUAL ?= $(if $(filter-out installer.elf,$(notdir $(HOST_PAYLOAD))),$(notdir $(HOST_PAYLOAD)),webkit-autoloader-installer_v$(BUILD_VERSION).elf)
 
 # Optional cache-repair hardware test builds; use make clean all when changing.
@@ -91,12 +96,13 @@ payload-deps:
 # are cached, so the choice of chain never has to invalidate anything.
 page: payload-deps
 	@mkdir -p build/autoloader
+	@echo "autoload payload: $(AUTOLOAD_ELF)"
 	$(PYTHON) tools/gen_version.py --page-config $(PAGE_CONFIG)
 	@for chain in $(CHAINS); do \
 	    echo "$(BUILDER) payloads/$$chain.js -> build/autoloader/$$chain.html"; \
 	    $(BUILDER) $(CURDIR)/payloads/elfldr-check.js payloads/$$chain.js $(CURDIR)/payloads/autoload.js::$(AUTOLOAD_PAYLOAD_VIRTUAL) \
 	        --title "$(BUILD_TITLE)" $(PAGE_FLAGS) \
-	        --embed $(AUTOLOAD_PAYLOAD_VIRTUAL)=build/deps/autoload.elf \
+	        --embed $(AUTOLOAD_PAYLOAD_VIRTUAL)=$(AUTOLOAD_ELF) \
 	        -o $(CURDIR)/build/autoloader/$$chain.html || exit 1; \
 	done
 

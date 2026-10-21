@@ -173,7 +173,7 @@ int main(void) {
     }
 
     if (atomic_load(&install_completed)) {
-        installer_notify("WebKit Autoloader v%s cached successfully!", WKAL_FULL_VERSION);
+        installer_notify("Linux Loader v%s cached successfully!", WKAL_FULL_VERSION);
     }
     installer_log_wakeup();
 

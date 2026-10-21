@@ -1,5 +1,6 @@
 // Presentation only: runs through the standalone builder's awaited --js hook.
 // Keep the actual console, payloads and exploit in this document.
+// Linux Loader theme: only display texts and the brand header differ from the original.
 (function () {
   'use strict';
   var output = document.getElementById('console');
@@ -22,18 +23,20 @@
   progress.setAttribute('aria-valuemax', '100');
   var bar = element('div', 'progressBar', progress);
   var label = element('div', 'progressLabel', progress);
-  var config = window.WKAL_PAGE || {};
-  if (config.version) {
-    document.title = 'WebKit Autoloader v' + config.version + ' by PLK' +
-      (config.buildTime ? ' (built ' + config.buildTime + ')' : '');
-  }
-  var footer = element('div', 'footer', document.body);
-  element('div', 'buildInfo', footer, 'WebKit Autoloader' +
-    (config.version ? ' v' + config.version : '') + ' by PLK' +
-    (config.buildTime ? ' (built ' + config.buildTime + ')' : ''));
-  var source = element('div', 'sourceInfo', footer, 'This project is free and open source: ');
-  var link = element('a', 'sourceLink', source, 'github.com/itsPLK/ps5-webkit-autoloader');
-  link.href = 'https://github.com/itsPLK/ps5-webkit-autoloader';
+  document.title = 'Linux Loader';
+
+  // Brand header: small penguin + title
+  var brand = element('div', 'brand', document.body);
+  brand.innerHTML =
+    '<svg viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">' +
+    '<ellipse cx="50" cy="70" rx="34" ry="46" fill="#1f2937"/>' +
+    '<ellipse cx="50" cy="78" rx="22" ry="33" fill="#f3f4f6"/>' +
+    '<circle cx="40" cy="38" r="7" fill="#fff"/><circle cx="60" cy="38" r="7" fill="#fff"/>' +
+    '<circle cx="41" cy="39" r="3" fill="#111"/><circle cx="59" cy="39" r="3" fill="#111"/>' +
+    '<polygon points="41,48 59,48 50,60" fill="#f59e0b"/>' +
+    '<ellipse cx="35" cy="112" rx="15" ry="6" fill="#f59e0b"/>' +
+    '<ellipse cx="65" cy="112" rx="15" ry="6" fill="#f59e0b"/>' +
+    '</svg><span>Linux <em>Loader</em></span>';
 
   var percent = 0;
   var finished = false;
@@ -55,7 +58,7 @@
     if (summary) {
       finished = true;
       if (Number(summary[1]) !== 0) update(percent, 'Autoload failed. See the log above.', 'error');
-      else update(100, sent ? 'Autoload finished.' : 'Payloads finished.', 'done');
+      else update(100, sent ? 'Autoload finished. Linux Loader should start now.' : 'Payloads finished.', 'done');
       return;
     }
     if (/queue stopped:/.test(text)) {
