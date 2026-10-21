@@ -6,10 +6,21 @@ loads a Linux loader payload, with one tap and no PC or internet needed after in
 This is a fork of [itsPLK/ps5-webkit-autoloader](https://github.com/itsPLK/ps5-webkit-autoloader)
 by PLK. All of the exploit chain, the on-console web server and the installer come from
 that project. This fork changes the look, the app identity and (optionally) bakes your own
-payload into the page. Supported firmware is the same as upstream (7.00 - 13.60).
+payload into the page.
 
-> **Bring your own payload.** This repository does not contain a Linux loader ELF.
-> You provide your own and the build embeds it.
+## Supported firmware
+
+**13.00, 13.20 and 13.60, with M.2 support.**
+
+## The Linux loader payload
+
+This repository does not contain the Linux loader ELF itself. The payload comes from
+[Ouroboroshen/ps5-linux-loader](https://github.com/Ouroboroshen/ps5-linux-loader), a fork of
+[ps5-linux/ps5-linux-loader](https://github.com/ps5-linux/ps5-linux-loader). Get
+`ps5-linux-loader.elf` from that project (its README points to the releases page, or you can
+build it yourself with `make`) and place it in the `custom` folder of this repository as
+`custom/Linuxloader.elf`. The build then embeds it. See the loader's own README for its
+features and the full list of firmware versions it covers.
 
 ## What is different from upstream
 
@@ -38,9 +49,10 @@ Requirements: Linux with `git`, `docker` (with `docker-buildx`), `make`, `python
 git clone --recursive https://github.com/Wawapun/ps5-linux-autoloader
 cd ps5-linux-autoloader
 
-# put your payload here (this folder is git-ignored)
+# put the loader payload here (this folder is git-ignored)
+# the file must be named Linuxloader.elf inside custom/
 mkdir -p custom
-cp /path/to/Linuxloader.elf custom/Linuxloader.elf
+cp /path/to/ps5-linux-loader.elf custom/Linuxloader.elf
 
 make icons
 ./build_release.sh
